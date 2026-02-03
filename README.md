@@ -11,3 +11,4 @@ This dataset contains 150 pairs of assignment texts labeled for plagiarism detec
 ```python
 import pandas as pd
 df = pd.read_csv("data/plagiarism_data.csv")
+df
