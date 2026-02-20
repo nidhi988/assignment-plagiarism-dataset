@@ -1,6 +1,6 @@
 # Online Assignment Plagiarism Dataset
 
-This dataset contains 150 pairs of assignment texts labeled for plagiarism detection. I am working on collecting more dataset. The model is trained to detect plagiarism between an uploaded file with the stored documents using TF-IDF, Cosine similarity and Logistic Regression. 
+This dataset contains 150 pairs of assignment texts labeled for plagiarism detection. I am working on collecting more dataset. The model is trained to detect plagiarism between an uploaded file with the stored documents using pipeline of TF-IDF, Cosine similarity and Logistic Regression model. 
 Database = PostgreSQL (Supabase)
 Docker
 Render (Deployment)
