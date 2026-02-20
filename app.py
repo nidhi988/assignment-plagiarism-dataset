@@ -9,6 +9,7 @@ from werkzeug.utils import secure_filename
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from feature_engineering import prepare_features
+from PyPDF2 import PdfReader
 import pandas as pd
 import os
 import psycopg2
@@ -39,15 +40,27 @@ def home():
 @app.route("/predict", methods=["GET", "POST"])
 def predict():
     from docx import Document
+    from PyPDF2 import PdfReader
     import io
 
     file = request.files["file"]
     filename = secure_filename(file.filename)
 
+    # -------- DOCX --------
     if filename.endswith(".docx"):
-       doc = Document(io.BytesIO(file.read()))
-       text = "\n".join([para.text for para in doc.paragraphs])
+        doc = Document(io.BytesIO(file.read()))
+        text = "\n".join([para.text for para in doc.paragraphs])
 
+    # -------- PDF --------
+    elif filename.endswith(".pdf"):
+        reader = PdfReader(io.BytesIO(file.read()))
+        text = ""
+        for page in reader.pages:
+            extracted = page.extract_text()
+            if extracted:
+                text += extracted + "\n"
+
+    # -------- TXT --------
     elif filename.endswith(".txt"):
         text = file.read().decode("utf-8", errors="ignore")
 
@@ -108,6 +121,7 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
