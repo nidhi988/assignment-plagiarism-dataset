@@ -52,13 +52,24 @@ def predict():
         text = "\n".join([para.text for para in doc.paragraphs])
 
     # -------- PDF --------
-    elif filename.endswith(".pdf"):
+    elif filename.lower().endswith(".pdf"):
+        try:
         reader = PdfReader(io.BytesIO(file.read()))
         text = ""
-        for page in reader.pages:
-            extracted = page.extract_text()
+
+        # Limit pages to avoid timeout
+        max_pages = min(10, len(reader.pages))
+
+        for i in range(max_pages):
+            extracted = reader.pages[i].extract_text()
             if extracted:
                 text += extracted + "\n"
+
+        except Exception:
+            return render_template(
+            "index.html",
+            prediction_text="Unable to process this PDF file."
+        )
 
     # -------- TXT --------
     elif filename.endswith(".txt"):
@@ -121,6 +132,7 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
