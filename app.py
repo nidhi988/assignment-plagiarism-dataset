@@ -54,16 +54,16 @@ def predict():
     # -------- PDF --------
     elif filename.lower().endswith(".pdf"):
         try:
-        reader = PdfReader(io.BytesIO(file.read()))
-        text = ""
+            reader = PdfReader(io.BytesIO(file.read()))
+            text = ""
 
-        # Limit pages to avoid timeout
-        max_pages = min(10, len(reader.pages))
+            # Limit pages to avoid timeout
+            max_pages = min(10, len(reader.pages))
 
-        for i in range(max_pages):
-            extracted = reader.pages[i].extract_text()
-            if extracted:
-                text += extracted + "\n"
+            for i in range(max_pages):
+                extracted = reader.pages[i].extract_text()
+                if extracted:
+                    text += extracted + "\n"
 
         except Exception:
             return render_template(
@@ -132,6 +132,7 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
