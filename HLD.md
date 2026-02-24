@@ -290,5 +290,84 @@ Logistic Regression Model
 Plagiarism Probability (%)
 
 
+<h1>6️⃣ Deployment Architecture</h1>
+
+The system is deployed using a containerized cloud-based architecture to ensure reliability, portability, and scalability.
+
+<h2>6.1 Deployment Overview</h2>
+
+The application is deployed on Render using Docker, with PostgreSQL hosted on Supabase Cloud.
+
+High-level deployment flow:
+
+
+            +------------------+
+            |      User        |
+            |  (Web Browser)   |
+            +--------+---------+
+                     |
+                     v
+        +---------------------------+
+        |   Render Cloud Platform   |
+        |  (Docker Container)       |
+        |---------------------------|
+        |  Flask Application        |
+        |  Gunicorn WSGI Server     |
+        +-------------+-------------+
+                      |
+                      v
+        +---------------------------+
+        |  PostgreSQL Database      |
+        |  (Supabase Cloud)         |
+        +---------------------------+
+
+
+<h2>6.2 Application Deployment (Render)</h2>
+
+a. The application is containerized using Docker.
+
+b. Render builds the Docker image from the repository.
+
+c. Gunicorn acts as the production WSGI server.
+
+d. The Flask app handles HTTP requests and model inference.
+
+<h2>6.3 Database Deployment (Supabase PostgreSQL)</h2>
+
+PostgreSQL database is hosted on Supabase Cloud. It stores the file name, ID, and assignment text content. The connection is established using environment variables.
+
+<h2>6.4 Deployment Workflow</h2>
+
+a. Code pushed to GitHub
+
+b. Render detects changes
+
+c. Docker image rebuilt
+
+d. Application redeployed
+
+e. Live URL updated automatically
+
+
+<h1>7️⃣ Future Enhancements</h1>
+
+The system can be further improved in the following ways:
+
+<h2>1. OCR Support for Scanned PDFs</h2>
+Enable text extraction from image-based PDFs to increase usability.
+
+<h2>2. Performance Optimization</h2>
+Improve comparison efficiency as the database size increases.
+
+<h2>3. Admin Dashboard</h2>
+Provide a dashboard to view submissions and plagiarism reports.
+
+<h2>4. Improved User Interface</h2>
+Add highlighted matched sections and better visual feedback.
+
+<h2>5. Batch Processing</h2>
+Allow bulk upload of assignments for classroom-level plagiarism checks.
+
+
   
 </p>
