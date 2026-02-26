@@ -71,4 +71,4 @@ Model saved as model.pkl using joblib.
 
 Application is deployed on Render using Docker runtime.
 Database hosted on Supabase (PostgreSQL).
-project app live url link - https://assignment-plagiarism-dataset.onrender.com
+Deployed on Render (Live Demo available upon request).
